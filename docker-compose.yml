@@ -1,6 +1,7 @@
 services:
-  web:
+  blog:
     build: .
+    container_name: blog
     command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/usr/src/app
@@ -14,6 +15,13 @@ services:
     depends_on:
       - db
       - redis
+    networks:
+      - dev-environment_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blog.rule=Host(`blog.docker.localhost`)"
+      - "traefik.http.routers.blog.tls=true"
+      - "traefik.http.services.blog.loadbalancer.server.port=3000"
   db:
     image: postgres:13
     ports:
@@ -22,12 +30,20 @@ services:
       - POSTGRES_PASSWORD=changeme
     volumes:
       - pg_data:/var/lib/postgresql/data
+    networks:
+      - dev-environment_default
   redis:
     image: redis
     volumes:
       - redis_data:/data
+    networks:
+      - dev-environment_default
 
 volumes:
   pg_data:
   redis_data:
   bundle:
+
+networks:
+  dev-environment_default:
+    external: true
