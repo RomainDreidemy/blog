@@ -7,7 +7,7 @@
     <% @articles.each do |article| %>
       <a class="article-item" href="<%= article_path(article) %>">
         <div>
-          <img src="https://placehold.co/400x400" alt="image">
+          <img src="<%= article.thumbnail_picture %>" alt="image">
         </div>
         <div>
           <h3><%= article.title %></h3>
