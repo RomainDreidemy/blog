@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body main .container {
+    @apply pt-16 w-8/12 my-0 mx-auto;
+}
+
+body header nav {
+    @apply h-16 bg-indigo-500;
+}
+
+#banner {
+    @apply h-banner bg-gray-100;
+}
+
+#articles-list .article-item {
+    @apply flex h-36 mb-3.5 border border-gray-100 rounded shadow hover:shadow-md overflow-hidden;
+}
+
+#articles-list .article-item div:first-child {
+    @apply h-full;
+}
+
+#articles-list .article-item div:last-child {
+    @apply p-3.5;
+}
+
+#articles-list .article-item div:first-child img {
+    @apply h-full;
+}
+
+#articles-list .article-item h3 {
+    @apply mb-2 text-2xl font-light;
+}
+
+#articles-list .article-item p {
+    @apply text-sm font-light italic;
+}
