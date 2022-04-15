@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  namespace :admin do
+      resources :articles
+      resources :users
+
+      root to: "articles#index"
+    end
+  devise_for :users, :skip => [:registration]
   root 'articles#index'
 
   resources :articles, only: [:index, :show]
